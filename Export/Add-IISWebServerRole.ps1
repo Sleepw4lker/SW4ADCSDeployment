@@ -12,6 +12,7 @@ Function Add-IISWebServerRole {
         Import-Module ServerManager
 
         If ($Force) {
+
             If ($True -eq (Get-WindowsFeature Web-Server).Installed) {
 
                 Write-Verbose "Removing Web Server Role"
@@ -28,6 +29,7 @@ Function Add-IISWebServerRole {
         }
 
         If ($False -eq (Get-WindowsFeature Web-Server).Installed) {
+            
             Write-Verbose "Installing Web Server Role"
 
             Try {
