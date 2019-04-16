@@ -63,7 +63,13 @@ Function Test-AdcsServiceAvailability {
         # Try to do a Query over the Interface
         Try {
             Write-Verbose "Trying to do a Query against $ConfigString"
-            [void]$CertAdmin.GetCAProperty($ConfigString,0x6,0,4,0)
+            [void]$CertAdmin.GetCAProperty(
+                $ConfigString,
+                0x6,
+                0,
+                4,
+                0
+            )
             $True
         }
         Catch {
