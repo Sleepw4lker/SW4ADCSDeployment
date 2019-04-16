@@ -1,4 +1,4 @@
-Function Test-TcpPort {
+Function Test-TimeZone {
     
     [cmdletbinding()]
     param (
