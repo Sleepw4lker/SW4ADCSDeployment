@@ -20,7 +20,7 @@ Function Test-TcpPort {
             $IpAddress = (Resolve-DnsName $ComputerName | Where-Object { $_.Type -eq "A" } | Select-Object -First 1).IPAddress
         } 
         Catch {
-            $False
+            return $False
         }
 
         $TcpClient = New-Object Net.Sockets.TcpClient
@@ -30,16 +30,16 @@ Function Test-TcpPort {
             $TcpClient.Connect($IpAddress, $Port)
         }
         Catch {
-            $False
+            return $False
         }
 
         If ($TcpClient.Connected) {
             Write-Verbose "Connection successful to $ComputerName ($IpAddress) on TCP Port $Port"
             $TcpClient.Close()
-            $True
+            return $True
         }
         Else {
-            $False                                 
+            return $False                                 
         }
 
     }

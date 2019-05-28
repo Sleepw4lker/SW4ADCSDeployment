@@ -14,17 +14,17 @@ Function New-OCSPResponderDeployment {
             Add-WindowsFeature ADCS-Device-Enrollment -IncludeManagementTools
         }
         Catch {
-            $False
+            return $False
         }
     
         Try {
             Install-AdcsOnlineResponder -Force
-
-            $True
         }
         Catch {
-            $False
+            return $False
         }
+
+        $True
         
     }
 

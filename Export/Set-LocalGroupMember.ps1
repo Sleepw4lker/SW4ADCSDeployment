@@ -25,7 +25,7 @@ Function Set-LocalGroupMember {
         }
 
         # Sucks, check if already present
-        $True
+        return $True
 
     }
     

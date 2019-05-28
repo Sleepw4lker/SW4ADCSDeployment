@@ -37,10 +37,11 @@ Function Test-OperatingSystem {
 
         If ($MinBuild -le $CurrentBuild) {
             Write-Verbose "Operating System Build ($CurrentBuild) is higher or equal than desired Build ($MinBuild)"
-            $True
-        } Else {
+            return $True
+        }
+        Else {
             Write-Verbose "Operating System Build ($CurrentBuild) is lower than desired Build ($MinBuild)"
-            $False
+            return $False
         }
 
     }

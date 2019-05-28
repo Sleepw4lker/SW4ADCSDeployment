@@ -36,7 +36,7 @@ Function Set-IISCertificate {
                         Remove-WebBinding -Name $Site -Protocol https
                     }
                     Catch {
-                        $False
+                        return $False
                     }
 
                 }
@@ -52,7 +52,7 @@ Function Set-IISCertificate {
                     New-WebBinding -Name $Site -Protocol https -Port 443 -SslFlags 0
                 }
                 Catch {
-                    $False
+                    return $False
                 }
             }
 
@@ -60,22 +60,23 @@ Function Set-IISCertificate {
                 $IisSslBinding = Get-WebBinding -Name $Site -Protocol https
             }
             Catch {
-                $False
+                return $False
             }
 
             Write-Verbose "Adding Certificate with $Thumbprint to https Binding on $Site"
 
             Try {
                 $IisSslBinding.AddSslCertificate($Thumbprint, "my")
-                $True
             }
             Catch {
-                $False
+                return $False
             }
         }
         Else {
             Write-Verbose "WebAdministration Module is not installed on this System!"
-            $False
+            return $False
         }
+
+        return $True
     }
 }

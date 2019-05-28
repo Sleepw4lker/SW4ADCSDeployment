@@ -134,10 +134,10 @@ Function New-OCSPRevocationConfiguration {
 
         }
         Catch {
-            $False
+            return $False
         }
 
-        $True
+        return $True
 
     }
 

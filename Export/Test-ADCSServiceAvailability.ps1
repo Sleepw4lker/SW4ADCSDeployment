@@ -46,7 +46,7 @@ Function Test-AdcsServiceAvailability {
 
             }
             Catch  {
-                $False
+                return $False
             }
 
         }
@@ -57,7 +57,7 @@ Function Test-AdcsServiceAvailability {
             $CertAdmin = New-Object -ComObject CertificateAuthority.Admin.1
         }
         Catch {
-            $False
+            return $False
         }
 
         # Try to do a Query over the Interface
@@ -70,11 +70,12 @@ Function Test-AdcsServiceAvailability {
                 4,
                 0
             )
-            $True
         }
         Catch {
-            $False
+            return $False
         }
+
+        return $True
 
     }
 

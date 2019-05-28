@@ -18,7 +18,7 @@ Function New-NDESDeployment {
             Add-WindowsFeature ADCS-Device-Enrollment -IncludeManagementTools
         }
         Catch {
-            $False
+            return $False
         }
     
         Try {
@@ -32,11 +32,13 @@ Function New-NDESDeployment {
                 -EncryptionKeyLength 2048 `
                 -Force
 
-            $True
+            
         }
         Catch {
-            $False
+            return $False
         }
+
+        return $True
         
     }
 

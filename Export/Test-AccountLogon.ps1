@@ -19,15 +19,16 @@ Function Test-AccountLogon {
 
         Try {
             net use "$($env:LOGONSERVER)\NETLOGON" $Password /user:$UserName
-            $True
         }
         Catch {
             Write-Verbose "Credentials for $Username could not be verified"
-            $False
+            return $False
         }
         Finally {
             net use "$($env:LOGONSERVER)\NETLOGON" /DELETE
         }
+
+        return $True
 
     }
 

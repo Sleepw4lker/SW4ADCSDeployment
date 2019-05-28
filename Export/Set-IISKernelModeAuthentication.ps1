@@ -44,18 +44,18 @@ Function Set-IISKernelModeAuthentication {
                         -Value $DesiredSetting `
                         -PSPath IIS: `
                         -Location $Location
-
-                    $True
                 }
                 Catch {
-                    $False
+                    return $False
                 }
             }
         }
         Else {
             Write-Verbose "WebAdministration Module is not installed on this System!"
-            $False
+            return $False
         }
+
+        return $True
 
     }
 

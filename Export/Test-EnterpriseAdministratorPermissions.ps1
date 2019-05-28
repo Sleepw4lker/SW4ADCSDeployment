@@ -14,7 +14,7 @@ Function Test-EnterpriseAdministratorPermissions {
                 Add-WindowsFeature "RSAT-AD-Powershell"
             }
             Catch {
-                $False
+                return $False
             }
         }
 
@@ -26,7 +26,7 @@ Function Test-EnterpriseAdministratorPermissions {
             $ForestRootDomain = $(Get-ADForest | Select-Object -ExpandProperty RootDomain | Get-ADDomain)
         }
         Catch {
-            $False
+            return $False
         }
 
         $DomainSid = $ForestRootDomain.DomainSID
@@ -38,10 +38,11 @@ Function Test-EnterpriseAdministratorPermissions {
 
         If ($GroupMemberships -contains $EnterpriseAdminsGroup) {
             Write-Verbose "User is Member of Enterprise Administrators!"
-            $True
-        } Else {
+            return $True
+        } 
+        Else {
             Write-Verbose "User is not Member of Enterprise Administrators!"
-            $False
+            return $False
         }
 
     }

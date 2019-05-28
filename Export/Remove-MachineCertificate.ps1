@@ -22,7 +22,7 @@ Function Remove-MachineCertificates {
     process {
 
         If ((-not $Subject) -and (-not $DnsName) -and (-not $EnhancedKeyUsage)) {
-            $False
+            return $False
         }
 
         $Certlist = Get-ChildItem Cert:\LocalMachine\My
@@ -51,7 +51,7 @@ Function Remove-MachineCertificates {
                     del "Cert:\LocalMachine\My\$($_.Thumbprint)" -DeleteKey
                 }
                 Catch {
-                    $False
+                    return $False
                 }
             }
             Else {
@@ -59,7 +59,7 @@ Function Remove-MachineCertificates {
                     del "Cert:\LocalMachine\My\$($_.Thumbprint)"
                 }
                 Catch {
-                    $False
+                    return $False
                 }
             }
         }

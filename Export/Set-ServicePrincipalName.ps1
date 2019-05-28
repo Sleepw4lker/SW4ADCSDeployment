@@ -25,11 +25,12 @@ Function Set-ServicePrincipalName {
         Try {
             setspn -s HTTP/$FQDN "$Principal"
             setspn -s HTTP/$ARecord "$Principal"
-            $True
         }
         Catch {
-            $False
+            return $False
         }
+
+        return $True
 
     }
 

@@ -7,11 +7,11 @@ Function Test-ElevationStatus {
 
         If(([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
             Write-Verbose "User is a local Administrator"
-            $True
+            return $True
         }
         Else {
             Write-Verbose "User is NOT a local Administrator"
-            $False
+            return $False
         }
     }
 }

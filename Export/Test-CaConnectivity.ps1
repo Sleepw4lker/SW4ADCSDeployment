@@ -16,12 +16,12 @@ Function Test-CaConnectivity {
             Write-Verbose "Testing Connectivity to $ComputerName on Port $($_)"
 
             If ((Test-TcpPort -ComputerName $ComputerName -Port $_) -ne $True) {
-                $False
+                return $False
             }
     
         }
 
-        $True
+        return $True
 
     }
 

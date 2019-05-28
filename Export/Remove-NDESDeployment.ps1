@@ -17,7 +17,7 @@ Function Remove-NDESDeployment {
                 # ExitCode      : SuccessRestartRequired
             }
             Catch {
-                $False
+                return $False
             }
     
             # Deleting the NDES Registry as it won't install if the Key is present
@@ -30,17 +30,17 @@ Function Remove-NDESDeployment {
 
             # We should reboot here, just in case... (or catch the RestartRequired Result)
             If ($Result.ExitCode -eq "SuccessRestartRequired") {
-                Write-Host "Restart Required, Rebooting 30 Seconds. Press Ctrl-C to cancel..." -ForegroundColor Red
+                Write-Warning "Restart Required, Rebooting 30 Seconds. Press Ctrl-C to cancel..."
                 Start-Sleep -Seconds 30
                 Restart-Computer
             }
             Else {
-                $True
+                return $True
             }
     
         }
         Else {
-            $True
+            return $True
         }
 
     }

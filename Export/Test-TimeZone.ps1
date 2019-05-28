@@ -12,10 +12,10 @@ Function Test-TimeZone {
 
         If ((Get-TimeZone).StandardName -ne $DesiredTimeZone) {
             Write-Verbose "System Time Zone is not $DesiredTimeZone!" -ForegroundColor Red 
-            $False
+            return $False
         }
 
-        $True
+        return $True
 
     }
 

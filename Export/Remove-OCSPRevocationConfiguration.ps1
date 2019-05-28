@@ -33,7 +33,7 @@ Function Remove-OCSPRevocationConfiguration {
             $True
         ) 
         
-        $True       
+        return $True       
 
     }
 

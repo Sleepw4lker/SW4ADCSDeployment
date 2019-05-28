@@ -25,18 +25,18 @@ Function Test-CertificateTemplateBinding  {
                 Add-WindowsFeature "RSAT-AD-Powershell"
             }
             Catch {
-                $False
+                return $False
             }
         }
 
-        Import-ModuleOnDemand "ActiveDirectory"
+        Import-Module "ActiveDirectory"
 
         Try {
             Write-Verbose "Trying to get the DN of the Forest Root Domain"
             $DsConfigDN = "CN=Configuration,$($(Get-ADForest | Select-Object -ExpandProperty RootDomain | Get-ADDomain).DistinguishedName)"
         }
         Catch {
-            $False
+            return $False
         }
 
         Try {
@@ -44,15 +44,15 @@ Function Test-CertificateTemplateBinding  {
             $CaObject = Get-ChildItem "AD:CN=Enrollment Services,CN=Public Key Services,CN=Services,$DsConfigDN" | Where-Object { $_.Name -eq $CA }
         }
         Catch {
-            $False
+            return $False
         }
 
         Write-Verbose "Checking if $Template is bound to $CA"
         If ((Get-ADObject $CaObject -Properties certificateTemplates).certificateTemplates | Where-Object { $_ -eq $Template }) {
-            $True
+            return $True
         }
         Else {
-            $False
+            return $False
         }
         
     }

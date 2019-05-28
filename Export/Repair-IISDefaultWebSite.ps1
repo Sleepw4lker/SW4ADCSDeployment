@@ -28,7 +28,7 @@ Function Repair-IISDefaultWebSite {
                         Remove-WebSite -Name "Default Web Site"
                     }
                     Catch {
-                        $False
+                        return $False
                     }
                 }
             }
@@ -42,21 +42,22 @@ Function Repair-IISDefaultWebSite {
                 # Recreate it if it is missing
                 Try {
                     New-WebSite -Name "Default Web Site" -Port 80 -PhysicalPath "%SystemDrive%\inetpub\wwwroot" -Id 1
-                    $True
                 }
                 Catch {
-                    $False
+                    return $False
                 }
             }
             Else {
-                $True
+                return $True
             }
 
         }
         Else {
             Write-Verbose "WebAdministration Module is not installed on this System!"
-            $False
+            return $False
         }
+
+        return $True
 
     }
 

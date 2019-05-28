@@ -15,7 +15,7 @@ function Get-CACertificateFromCA {
         $CertRequest = New-Object -ComObject CertificateAuthority.Request
 
         $CaCertificate = $CertRequest.GetCACertificate(
-            [int]$False,
+            [int]$False, # If fExchangeCertificate is set to true, the Exchange certificate of the CA will be returned. 
             $ConfigString,
             1
         )

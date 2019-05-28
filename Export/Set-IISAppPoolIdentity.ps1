@@ -38,11 +38,9 @@ Function Set-IISAppPoolIdentity {
                         -name processModel `
                         -value @{userName="$($UserName)";password="$($Password)";identitytype=3}
 
-                    $True
-
                 } 
                 Catch {
-                    $False
+                    return $False
                 }
 
             }
@@ -53,12 +51,10 @@ Function Set-IISAppPoolIdentity {
                     Set-ItemProperty IIS:\AppPools\$AppPool `
                         -name processModel `
                         -value @{userName="$($UserName)";identitytype=3}
-
-                    $True
                 
                 } 
                 Catch {
-                    $False
+                    return $False
                 }
 
             }
@@ -66,8 +62,10 @@ Function Set-IISAppPoolIdentity {
         }
         Else {
             Write-Verbose "WebAdministration Module is not installed on this System!"
-            $False
+            return $False
         }
+
+        return $True
 
     }
 

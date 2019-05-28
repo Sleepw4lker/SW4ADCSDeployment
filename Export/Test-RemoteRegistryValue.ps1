@@ -29,14 +29,14 @@ Function Test-RemoteRegistryValue {
 
         }
         Catch {
-            $False
+            return $False
         }
 
         If ($Data) {
-            $True
+            return $True
         }
         Else {
-            $False
+            return $False
         }
 
     }

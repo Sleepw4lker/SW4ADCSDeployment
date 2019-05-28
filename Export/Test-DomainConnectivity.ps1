@@ -23,7 +23,7 @@ Function Test-DomainConnectivity {
                 Add-WindowsFeature "RSAT-AD-Powershell"
             }
             Catch {
-                $False
+                return $False
             }
         }
 
@@ -35,7 +35,7 @@ Function Test-DomainConnectivity {
             $ForestRootDomain = $(Get-ADForest | Select-Object -ExpandProperty RootDomain | Get-ADDomain)
         }
         Catch {
-            $False
+            return $False
         }
 
         $ForestRootDomainName = $ForestRootDomain.DNSroot
@@ -50,14 +50,14 @@ Function Test-DomainConnectivity {
             88,135,389,445 | ForEach-Object {
 
                 If ((Test-TcpPort -ComputerName $ComputerName -Port $_) -ne $True) {
-                    $False
+                    return $False
                 }
 
             }
 
         }
 
-        $True
+        return $True
 
     }
 

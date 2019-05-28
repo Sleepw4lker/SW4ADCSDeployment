@@ -26,7 +26,7 @@ Function Get-RemoteRegistryValue {
             $Registry = [Microsoft.Win32.RegistryKey]::OpenRemoteBaseKey('LocalMachine', $ComputerName)
         }
         Catch {
-            $False
+            return $False
         }
 
         Write-Verbose "Getting $Value from $Key"
@@ -36,7 +36,7 @@ Function Get-RemoteRegistryValue {
             $SubKey.GetValue($Value)
         }
         Catch {
-            $False
+            return $False
         }
 
     }

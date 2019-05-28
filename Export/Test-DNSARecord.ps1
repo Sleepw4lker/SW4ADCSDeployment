@@ -15,7 +15,7 @@ Function Test-DnsARecord {
     process {
 
         $DnsCheck = Resolve-DnsName $Record
-        $Peter = $False
+        $Result = $False
 
         If ($DnsCheck) {
 
@@ -36,7 +36,7 @@ Function Test-DnsARecord {
                         # We use the match operator in the hope that it will work with IPv6 as well 
                         # (not tested - Ipv6 addresses have an Interface Identifier %something)
                         If ($DnsIP -match $_) {
-                            $Peter = $True
+                            $Result = $True
                         }
                     }
 
@@ -44,14 +44,14 @@ Function Test-DnsARecord {
                 }
                 Else {
                     # If we do not verify against the local IPs, we're done
-                    $Peter = $True
+                    $Result = $True
                 }
 
             }
 
         }
 
-        $Peter
+        return $Result
 
     }
 
